@@ -9,8 +9,13 @@ __author__ = 'raymond'
 
 class BloombergDataReader:
 	@classmethod
-	def load_bloomberg_trading_data(cls, file_name):
-		with open(file_name, 'r') as csv_file:
+	def load_bloomberg_trading_data(cls, bid_data_file, ask_data_file):
+		cls.load_single_data_sheet(bid_data_file, 'BID')
+		cls.load_single_data_sheet(ask_data_file, 'ASK')
+
+	@classmethod
+	def load_single_data_sheet(cls, data_file, price_type):
+		with open(data_file, 'r') as csv_file:
 			reader = csv.reader(csv_file)
 
 			cls.ignore_header(reader)
@@ -22,9 +27,7 @@ class BloombergDataReader:
 
 			for row in reader:
 				prices_and_indexes_generator = trading_data_row_parser.split_by_ticker_symbol(row)
-				stock_history_record_builder.add_prices_by_tickers(prices_and_indexes_generator)
-
-			print('hello world')
+				stock_history_record_builder.add_prices_by_tickers(prices_and_indexes_generator, price_type)
 
 	@classmethod
 	def extract_stock_tickers(cls, tickers):

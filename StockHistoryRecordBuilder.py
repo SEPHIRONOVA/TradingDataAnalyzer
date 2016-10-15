@@ -11,11 +11,11 @@ class StockHistoryRecordBuilder:
 		self.index_and_tickers = index_and_tickers
 		self.time_stamp_price_builder = TimeStampPriceBuilder(index_and_tickers)
 
-	def add_prices_by_tickers(self, prices_and_indexes_generator):
+	def add_prices_by_tickers(self, prices_and_indexes_generator, price_type):
 		for price_tokens, start_index in prices_and_indexes_generator:
-			self._add_price_to_stock_history_record(price_tokens, start_index)
+			self._add_price_to_stock_history_record(price_tokens, start_index, price_type)
 
-	def _add_price_to_stock_history_record(self, price_tokens, start_index):
+	def _add_price_to_stock_history_record(self, price_tokens, start_index, price_type):
 		if not self.time_stamp_price_builder.is_valid(price_tokens):
 			return
 
@@ -27,7 +27,11 @@ class StockHistoryRecordBuilder:
 			self.stock_history_records[ticker] = stock_history_record
 
 		# TODO: Handle Bid and ask
-		self.stock_history_records[ticker].add_time_stamp_price(time_stamp_price, 'BID')
+		if price_type is 'BID':
+			self.stock_history_records[ticker].add_time_stamp_price(time_stamp_price, 'BID')
+		elif price_type is 'ASK':
+			self.stock_history_records[ticker].add_time_stamp_price(time_stamp_price, 'ASK')
+
 
 	def _find_ticker_by_index(self, index) -> str:
 		assert index in self.index_and_tickers
