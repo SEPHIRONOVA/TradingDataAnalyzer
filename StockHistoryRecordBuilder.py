@@ -6,8 +6,12 @@ __author__ = 'raymond'
 
 
 class StockHistoryRecordBuilder:
-	def __init__(self, index_and_tickers: Dict[int, str], spacing):
+	def __init__(self):
 		self.stock_history_records = {}  # type: Dict[str, StockHistoryRecord]
+		self.index_and_tickers = {}
+		self.time_stamp_price_builder = None
+
+	def setup(self, index_and_tickers: Dict[int, str], spacing):
 		self.index_and_tickers = index_and_tickers
 		self.time_stamp_price_builder = TimeStampPriceBuilder(index_and_tickers)
 
@@ -26,12 +30,10 @@ class StockHistoryRecordBuilder:
 			stock_history_record = StockHistoryRecord(ticker)
 			self.stock_history_records[ticker] = stock_history_record
 
-		# TODO: Handle Bid and ask
 		if price_type is 'BID':
 			self.stock_history_records[ticker].add_time_stamp_price(time_stamp_price, 'BID')
 		elif price_type is 'ASK':
 			self.stock_history_records[ticker].add_time_stamp_price(time_stamp_price, 'ASK')
-
 
 	def _find_ticker_by_index(self, index) -> str:
 		assert index in self.index_and_tickers
