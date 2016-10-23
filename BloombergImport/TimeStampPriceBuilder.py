@@ -1,6 +1,8 @@
 from typing import Dict
 from datetime import datetime
+
 from Models.TimeStampPrice import TimeStampPrice
+from BloombergImport.PriceTokensValidator import PriceTokensValidator
 
 __author__ = 'raymond'
 
@@ -8,18 +10,10 @@ __author__ = 'raymond'
 class TimeStampPriceBuilder:
 	def __init__(self, index_and_tickers: Dict[int, str]):
 		self.index_and_tickers = index_and_tickers
-
-	@staticmethod
-	def is_valid(price_tokens):
-		first_token_index = 0
-
-		if price_tokens[first_token_index]:
-			return True
-		else:
-			return False
+		self.price_token_validator = PriceTokensValidator()
 
 	def build(self, price_tokens):
-		assert self.is_valid(price_tokens)
+		assert self.price_token_validator.is_valid(price_tokens)
 
 		datetime_index = 0
 		open_price_index = 1

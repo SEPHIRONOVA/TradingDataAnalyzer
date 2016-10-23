@@ -1,6 +1,8 @@
 from typing import Dict
+
 from Models.StockHistoryRecord import StockHistoryRecord
-from TimeStampPriceBuilder import TimeStampPriceBuilder
+from BloombergImport.TimeStampPriceBuilder import TimeStampPriceBuilder
+from BloombergImport.PriceTokensValidator import PriceTokensValidator
 
 __author__ = 'raymond'
 
@@ -9,18 +11,19 @@ class StockHistoryRecordBuilder:
 	def __init__(self):
 		self.stock_history_records = {}  # type: Dict[str, StockHistoryRecord]
 		self.index_and_tickers = {}
-		self.time_stamp_price_builder = None
+		self.time_stamp_price_builder = None  # type: TimeStampPriceBuilder
+		self.price_token_validator = PriceTokensValidator()
 
 	def setup(self, index_and_tickers: Dict[int, str], spacing):
 		self.index_and_tickers = index_and_tickers
 		self.time_stamp_price_builder = TimeStampPriceBuilder(index_and_tickers)
 
-	def add_prices_by_tickers(self, prices_and_indexes_generator, price_type):
-		for price_tokens, start_index in prices_and_indexes_generator:
+	def add_prices_by_tickers(self, prices_and_indexes, price_type):
+		for price_tokens, start_index in prices_and_indexes:
 			self._add_price_to_stock_history_record(price_tokens, start_index, price_type)
 
 	def _add_price_to_stock_history_record(self, price_tokens, start_index, price_type):
-		if not self.time_stamp_price_builder.is_valid(price_tokens):
+		if not self.price_token_validator.is_valid(price_tokens):
 			return
 
 		time_stamp_price = self.time_stamp_price_builder.build(price_tokens)
