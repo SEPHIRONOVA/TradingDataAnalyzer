@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-from BloombergImport.BloombergDataReader import BloombergDataReader
+from BloombergImport.bloomberg_data_reader import BloombergDataReader
 
 __author__ = 'raymond'
 

@@ -6,7 +6,7 @@ __author__ = 'raymond'
 class PriceTokensValidator:
 	def __init__(self):
 		self.opening_time = time(9, 30, 0)
-		self.closing_time = time(14, 0, 0)
+		self.closing_time = time(16, 0, 0)
 
 	def is_valid(self, price_tokens):
 		if not PriceTokensValidator._has_valid_prices(price_tokens):

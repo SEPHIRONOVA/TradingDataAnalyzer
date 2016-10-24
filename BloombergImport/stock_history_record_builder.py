@@ -1,8 +1,8 @@
 from typing import Dict
 
-from Models.StockHistoryRecord import StockHistoryRecord
-from BloombergImport.TimeStampPriceBuilder import TimeStampPriceBuilder
-from BloombergImport.PriceTokensValidator import PriceTokensValidator
+from Models.stock_history_record import StockHistoryRecord
+from BloombergImport.timestamp_price_builder import TimeStampPriceBuilder
+from BloombergImport.price_tokens_validator import PriceTokensValidator
 
 __author__ = 'raymond'
 

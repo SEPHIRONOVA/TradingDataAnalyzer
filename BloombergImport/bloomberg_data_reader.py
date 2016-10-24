@@ -1,7 +1,8 @@
 import csv
 
-from BloombergImport.TradingDataRowParser import TradingDataRowParser
-from BloombergImport.StockHistoryRecordBuilder import StockHistoryRecordBuilder
+from BloombergImport.trading_data_row_parser import TradingDataRowParser
+from BloombergImport.stock_history_record_builder import StockHistoryRecordBuilder
+from BloombergImport.stock_history_record_normalizer import StockHistoryRecordNormalizer
 
 __author__ = 'raymond'
 
@@ -12,6 +13,11 @@ class BloombergDataReader:
 		stock_history_record_builder = StockHistoryRecordBuilder()
 		cls._load_single_data_sheet(bid_data_file, 'BID', stock_history_record_builder)
 		cls._load_single_data_sheet(ask_data_file, 'ASK', stock_history_record_builder)
+
+		stock_history_records = stock_history_record_builder.stock_history_records
+		for key, record in stock_history_records.items():
+			StockHistoryRecordNormalizer.normalize(record)
+
 		print('hello world')
 
 	@classmethod

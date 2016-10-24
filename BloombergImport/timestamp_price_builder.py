@@ -1,8 +1,8 @@
 from typing import Dict
 from datetime import datetime
 
-from Models.TimeStampPrice import TimeStampPrice
-from BloombergImport.PriceTokensValidator import PriceTokensValidator
+from Models.timestamp_price import TimeStampPrice
+from BloombergImport.price_tokens_validator import PriceTokensValidator
 
 __author__ = 'raymond'
 
