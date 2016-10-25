@@ -26,7 +26,7 @@ class StockHistoryRecordNormalizer:
 
 			for day in range(0, days_count, 1):
 				opening_time = time(9, 30, 0)
-				prev_datetime = timestamp_prices[i]
+				prev_datetime = timestamp_prices[i].datetime
 				prev_open_price = -1.0
 				prev_high_price = -1.0
 				prev_low_price = -1.0

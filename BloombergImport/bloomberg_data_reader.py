@@ -1,4 +1,5 @@
 import csv
+import time
 
 from BloombergImport.trading_data_row_parser import TradingDataRowParser
 from BloombergImport.stock_history_record_builder import StockHistoryRecordBuilder
@@ -11,18 +12,26 @@ __author__ = 'raymond'
 class BloombergDataReader:
 	@classmethod
 	def load_bloomberg_trading_data(cls, bid_data_file, ask_data_file):
+		print(time.clock())
 		stock_history_record_builder = StockHistoryRecordBuilder()
 		cls._load_single_data_sheet(bid_data_file, 'BID', stock_history_record_builder)
 		cls._load_single_data_sheet(ask_data_file, 'ASK', stock_history_record_builder)
+
+		print('datesheet fully loaded')
+		print(time.clock())
 
 		stock_history_records = stock_history_record_builder.stock_history_records
 		for key, record in stock_history_records.items():
 			StockHistoryRecordNormalizer.normalize(record)
 
 		market_history = [stock_history_record for ticker_symbol, stock_history_record in stock_history_records.items()]
-		temp = MarketHistoryNormalizer._get_earliest_date(market_history)
+		temp = MarketHistoryNormalizer._get_largest_starting_date(market_history)
 
-		print('hello world')
+		print('data sanitization completed')
+		print(time.clock())
+
+		print(temp)
+		print('Completed')
 
 	@classmethod
 	def _load_single_data_sheet(cls, data_file, price_type, stock_history_record_builder):
