@@ -64,10 +64,8 @@ class StockHistoryRecordNormalizer:
 		total_days_count = {}
 
 		for price_type, timestamp_prices in stock_history_record.prices_by_type.items():
-			first_day = timestamp_prices[0].datetime
-			last_day = timestamp_prices[len(timestamp_prices) - 1].datetime
-
-			total_days_count[price_type] = (last_day - first_day).days + 1
+			distinct_days = set(timestamp_price.datetime.date() for timestamp_price in timestamp_prices)
+			total_days_count[price_type] = len(distinct_days)
 
 		return total_days_count
 
