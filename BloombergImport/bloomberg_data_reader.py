@@ -3,6 +3,7 @@ import csv
 from BloombergImport.trading_data_row_parser import TradingDataRowParser
 from BloombergImport.stock_history_record_builder import StockHistoryRecordBuilder
 from BloombergImport.stock_history_record_normalizer import StockHistoryRecordNormalizer
+from BloombergImport.market_history_normalizer import MarketHistoryNormalizer
 
 __author__ = 'raymond'
 
@@ -17,6 +18,9 @@ class BloombergDataReader:
 		stock_history_records = stock_history_record_builder.stock_history_records
 		for key, record in stock_history_records.items():
 			StockHistoryRecordNormalizer.normalize(record)
+
+		market_history = [stock_history_record for ticker_symbol, stock_history_record in stock_history_records.items()]
+		temp = MarketHistoryNormalizer._get_earliest_date(market_history)
 
 		print('hello world')
 

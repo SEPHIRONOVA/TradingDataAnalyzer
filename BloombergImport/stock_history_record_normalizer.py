@@ -26,7 +26,6 @@ class StockHistoryRecordNormalizer:
 
 			for day in range(0, days_count, 1):
 				opening_time = time(9, 30, 0)
-				curr_time = opening_time
 				prev_datetime = timestamp_prices[i]
 				prev_open_price = -1.0
 				prev_high_price = -1.0
@@ -56,8 +55,6 @@ class StockHistoryRecordNormalizer:
 						timestamp_prices.insert(i, new_timestamp_price)
 
 					i += 1
-
-				print('hello')
 
 	@staticmethod
 	def _get_days(stock_history_record: StockHistoryRecord):
