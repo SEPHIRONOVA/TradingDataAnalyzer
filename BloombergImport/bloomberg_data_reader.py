@@ -25,12 +25,19 @@ class BloombergDataReader:
 			StockHistoryRecordNormalizer.normalize(record)
 
 		market_history = [stock_history_record for ticker_symbol, stock_history_record in stock_history_records.items()]
-		temp = MarketHistoryNormalizer._get_largest_starting_date(market_history)
+		starting_date = MarketHistoryNormalizer._get_largest_starting_date(market_history)
+
+		for key, record in stock_history_records.items():
+			StockHistoryRecordNormalizer._remove_extra_days(record, starting_date)
+
+		days_for_each_stock = [StockHistoryRecordNormalizer._get_days(record) for key, record in stock_history_records.items()]
+
+		print(days_for_each_stock)
 
 		print('data sanitization completed')
 		print(time.clock())
 
-		print(temp)
+		print(starting_date)
 		print('Completed')
 
 	@classmethod
