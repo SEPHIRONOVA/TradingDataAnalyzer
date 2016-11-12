@@ -1,7 +1,7 @@
 import pandas as pd
-from StoreStrategy import storage
 
-class calculateMCAD:
+
+class calculatemcad:
     @classmethod
     def getMCAD(data):
         ema26 = pd.ewma(data, span = 26)
