@@ -1,5 +1,6 @@
 import pandas as pd
-from StoreStrategy import storage
+import math
+
 
 class calculateMCAD:
     @classmethod

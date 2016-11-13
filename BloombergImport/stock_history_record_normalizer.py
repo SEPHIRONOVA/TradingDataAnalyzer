@@ -14,13 +14,13 @@ class StockHistoryRecordNormalizer:
 		StockHistoryRecordNormalizer._fill_empty_timestamps(stock_history_record)
 
 	@staticmethod
-	def _remove_extra_days(stock_history_record: StockHistoryRecord, starting_date: date):
+	def remove_extra_days(stock_history_record: StockHistoryRecord, starting_date: date):
 		for price_type, timestamp_prices in stock_history_record.prices_by_type.items():
 			stock_history_record.prices_by_type[price_type] = [timestamp_price for timestamp_price in timestamp_prices if timestamp_price.datetime.date() >= starting_date]
 
 	@staticmethod
 	def _fill_empty_timestamps(stock_history_record: StockHistoryRecord):
-		total_days_count = StockHistoryRecordNormalizer._get_days(stock_history_record)
+		total_days_count = StockHistoryRecordNormalizer.get_days(stock_history_record)
 
 		for price_type, timestamp_prices in stock_history_record.prices_by_type.items():
 			assert len(timestamp_prices) >= 1
@@ -62,7 +62,7 @@ class StockHistoryRecordNormalizer:
 					i += 1
 
 	@staticmethod
-	def _get_days(stock_history_record: StockHistoryRecord):
+	def get_days(stock_history_record: StockHistoryRecord):
 		total_days_count = {}
 
 		for price_type, timestamp_prices in stock_history_record.prices_by_type.items():

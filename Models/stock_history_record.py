@@ -1,4 +1,5 @@
 from Models.timestamp_price import TimeStampPrice
+from Simulation.stock_snapshot import StockSnapshot
 
 __author__ = 'raymond'
 
@@ -13,3 +14,7 @@ class StockHistoryRecord:
 			self.prices_by_type['BID'].append(time_stamp_price)
 		elif price_type == 'ASK':
 			self.prices_by_type['ASK'].append(time_stamp_price)
+
+	def get_next(self):
+		for prices in zip(self.prices_by_type['ASK'], self.prices_by_type['BID']):
+			yield StockSnapshot(self.ticker_symbol, prices[0], prices[1])
