@@ -1,2 +1,2 @@
 __author__ = 'raymond'
-__all__ = ['calculateMCAD', 'stockdatabase', 'Market', 'StockSnapshot', 'MarketSnapshot']
+__all__ = ['calculateMCAD', 'stockdatabase', 'Market', 'StockSnapshot', 'MarketSnapshot', 'Trader', 'Portfolio']
