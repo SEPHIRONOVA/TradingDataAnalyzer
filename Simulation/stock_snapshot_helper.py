@@ -13,7 +13,7 @@ class StockSnapshotHelper:
 		return (self.stock_snapshot.ask_price.last_price + self.stock_snapshot.bid_price.last_price) / 2
 
 	def is_end_of_trading_hours(self):
-		if self.stock_snapshot.ask_price.datetime == self._closing_time:
+		if self.stock_snapshot.ask_price.datetime.time() == self._closing_time:
 			return True
 		else:
 			return False
