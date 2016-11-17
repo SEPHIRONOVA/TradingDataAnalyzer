@@ -1,11 +1,11 @@
 from typing import Dict
 
 from Models.stock_history_record import StockHistoryRecord
+from Models.market_history import MarketHistory
 from BloombergImport.timestamp_price_builder import TimeStampPriceBuilder
 from BloombergImport.price_tokens_validator import PriceTokensValidator
 
 __author__ = 'raymond'
-
 
 class StockHistoryRecordBuilder:
 	def __init__(self):
