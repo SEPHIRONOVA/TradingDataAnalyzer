@@ -4,9 +4,9 @@ import pandas as pd
 class calculatemcad:
     @classmethod
     def getMCAD(data):
-        ema26 = pd.ewma(data, span = 26)
-        ema12 = pd.ewma(data, span = 12)
-        ema09 = pd.ewma(data, span = 9)
+        ema26 = pd.ewma(data['price'], span = 26)
+        ema12 = pd.ewma(data['price'], span = 12)
+        ema09 = pd.ewma(data['price'], span = 9)
         mcadline = ema12 - ema26
         mcadhistogram = mcadline-ema09
         print(mcadline)

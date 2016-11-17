@@ -18,15 +18,12 @@ class stockdatabase:
         #print(self.stockprice)
         #self.stockprice.fillna()
 
-    def add_time_price(curtime,curprice):
+    def add_time_price(self,curtime,curprice):
         toappend = pd.DataFrame([[curtime,curprice]], columns=['time','price'])
         #print(toappend)
-        stockdatabase.stockprice = stockdatabase.stockprice.append(toappend,ignore_index = True)
-        #print(stockdatabase.stockprice)
+        self.stockprice = self.stockprice.append(toappend,ignore_index = True)
+        #print(self.stockprice)
 
     def gettail(x):
         return stockdatabase.stockprice.tail(x)
-
-    def print(self):
-        print(stockdatabase.stockprice)
 
