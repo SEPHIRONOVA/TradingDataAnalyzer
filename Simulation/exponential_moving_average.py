@@ -19,13 +19,14 @@ class ExponentialMovingAverage:
 
 			return CalculationStatus.Invalid
 		elif self.next_minute == self.first_valid_minute:
-			price_series = pd.Series(self.price_buffer)
-			ema = price_series.mean()
+			#price_series = pd.Series(self.price_buffer)
+			ema = current_price
 			self.prev_ema = ema
 
 			return ema
 		else:
 			ema = self.prev_ema + (current_price - self.prev_ema) * self.multiplier
+			self.prev_ema = ema
 
 			return ema
 
