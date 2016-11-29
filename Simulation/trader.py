@@ -1,4 +1,3 @@
-from typing import Dict
 from Models.portfolio_summary import PortfolioSummary
 from Models.daily_result import DailyResult
 from Simulation.portfolio import Portfolio
@@ -26,6 +25,12 @@ class Trader:
 			print("\n")
 			print("The end of day")
 			print(daily_result.date)
+
+			print("The remaining cash of today")
+			print(daily_result.cash)
+
+			print("The total capital of today")
+			print(daily_result.portfolio_summary.calculate_capital())
 			#for Target_exposure in daily_result.portfolio_summary.target_exposures:
 			#	print(Target_exposure.ticker)
 			#	print(Target_exposure.amount)
@@ -70,7 +75,8 @@ class Trader:
 	def calculate_daily_profit_loss(self):
 		daily_p_l = list()
 		for daily_result in self.daily_results:
-			daily_p_l.append(DailyResultEvaluator.calculate_profit_or_loss(self.daily_result_evaluator,daily_result))
+			daily_p_l.append(self.daily_result_evaluator.calculate_profit_or_loss(daily_result))
+			#daily_p_l.append(DailyResultEvaluator.calculate_profit_or_loss(self.daily_result_evaluator,daily_result))
 
 		return daily_p_l
 
