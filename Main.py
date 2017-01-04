@@ -9,7 +9,7 @@ from Simulation.vanilla_mcad_strategy import VanillaMcadStrategy
 __author__ = 'raymond'
 
 if __name__ == '__main__':
-	capital_per_stock = 10000
+	capital_per_stock = 100000
 
 	market_history = BloombergDataReader.load_bloomberg_trading_data('Resources/TSX60 Trading Testing Data(BID).csv',
 																	 'Resources/TSX60 Trading Testing Data(ASK).csv')

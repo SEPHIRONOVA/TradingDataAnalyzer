@@ -5,7 +5,6 @@ from Simulation.market_snapshot_helper import MarketSnapshotHelper
 
 __author__ = 'raymond'
 
-
 class Portfolio:
 	def __init__(self):
 		self.shares_by_ticker = {}
