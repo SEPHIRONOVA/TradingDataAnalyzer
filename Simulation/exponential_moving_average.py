@@ -26,6 +26,7 @@ class ExponentialMovingAverage:
 			return ema
 		else:
 			ema = self.prev_ema + (current_price - self.prev_ema) * self.multiplier
+			self.prev_ema = ema
 
 			return ema
 

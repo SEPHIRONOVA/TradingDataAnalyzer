@@ -11,8 +11,8 @@ __author__ = 'raymond'
 if __name__ == '__main__':
 	capital_per_stock = 10000
 
-	market_history = BloombergDataReader.load_bloomberg_trading_data('Resources/TSX60 Trading Testing Data(BID).csv',
-																	 'Resources/TSX60 Trading Testing Data(ASK).csv')
+	market_history = BloombergDataReader.load_bloomberg_trading_data('Resources/TSX60 Trading Data(BID).csv',
+																	 'Resources/TSX60 Trading Data(ASK).csv')
 	print()
 	print()
 	market = Market(market_history)

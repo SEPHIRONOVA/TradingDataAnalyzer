@@ -2,6 +2,7 @@ import time
 from Models.market_history import MarketHistory
 from Simulation.market_snapshot import MarketSnapshot
 from Simulation.market_snapshot_helper import MarketSnapshotHelper
+from Simulation.daily_result_evaluator import DailyResultEvaluator
 
 __author__ = 'raymond'
 
@@ -23,11 +24,18 @@ class Market:
 		print('Starting Market simulation')
 		print(time.clock())
 		for market_snapshot in self._get_market_snapshot():
-			self._print_when_day_pass(old_date, market_snapshot)
+			old_date = Market._print_when_day_pass(old_date, market_snapshot)
 			self.notify_all(market_snapshot)
 
 		print('Market simulation ended')
 		print(time.clock())
+		
+		evaluator = DailyResultEvaluator(1000 * 60)
+		for daily_result in self.traders[0].daily_results:
+			PnL = evaluator.calculate_profit_or_loss(daily_result)
+			print(daily_result.date)
+			print(PnL)
+			print()
 
 	def register(self, trader):
 		if trader in self.traders:
@@ -48,7 +56,8 @@ class Market:
 	def get_num_stocks(self):
 		return self.market_history.get_num_stocks()
 
-	def _print_when_day_pass(self, old_date, market_snapshot):
+	@staticmethod
+	def _print_when_day_pass(old_date, market_snapshot):
 		market_snapshot_helper = MarketSnapshotHelper(market_snapshot)
 
 		if old_date is None:
@@ -58,8 +67,10 @@ class Market:
 			if date == old_date:
 				return
 			else:
-				print('Processing date: %s', str(date))
+				print('Processing date: ', str(date))
 				old_date = date
+
+		return old_date
 
 	def _get_market_snapshot(self):
 		stock_snapshot_generators = [stock_snapshot for stock_snapshot in [stock_history_record.get_next() for ticker, stock_history_record in self.market_history.records.items()]]
