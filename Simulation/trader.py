@@ -25,7 +25,7 @@ class Trader:
 			self.daily_results.append(daily_result)
 			self.portfolio.clear()
 			visualization_data = self.strategy.reset()
-			SimulationVisualizer.save_visualization_data(market_snapshot_helper.get_date(), visualization_data)
+			#SimulationVisualizer.save_visualization_data(market_snapshot_helper.get_date(), visualization_data)
 
 			self.total_capital = self.total_capital_backup
 			return
@@ -35,11 +35,13 @@ class Trader:
 		for ticker, amount in decisions:
 			if amount > 0:
 				extra_capital = self.portfolio.buy(market_snapshot, ticker, amount)
+				assert extra_capital >= 0
 				self.total_capital -= amount
 				self.total_capital += extra_capital
 			elif amount < 0:
-				extra_capital = self.portfolio.short(market_snapshot, ticker, -amount)
-				self.total_capital += amount
+				extra_capital = self.portfolio.short(market_snapshot, ticker, abs(amount))
+				assert extra_capital >= 0
+				self.total_capital += abs(amount)
 				self.total_capital -= extra_capital
 			else:
 				print('DEBUG: Should never happen')
