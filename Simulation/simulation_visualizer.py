@@ -20,9 +20,6 @@ class SimulationVisualizer:
 
 		plt.title(ticker_symbol + '--' + str(date))
 		ax1.plot(minutes_elapsed, stock_prices, 'b', label='prices')
-		plt.xlabel('minutes elapsed')
-		plt.ylabel('price')
-		plt.legend(loc='upper center', shadow=True)
 		ax2.plot(minutes_elapsed, mcad_history, 'r', label='mcad history')
 		plt.xlabel('minutes elapsed')
 		plt.ylabel('price')

@@ -41,7 +41,6 @@ class VanillaMcadStrategy:
 			if self.old_mcads[i] == CalculationStatus.Invalid:
 				self.old_mcads[i] = curr_mcad
 				continue
-
 			del_mcad = SignFunction.evaluate(curr_mcad) - SignFunction.evaluate(self.old_mcads[i])
 			self.old_mcads[i] = curr_mcad
 
@@ -53,8 +52,10 @@ class VanillaMcadStrategy:
 		return decisions
 
 	def reset(self):
-		map(lambda mcad: mcad.reset(), self.mcads)
-		map(lambda old_mcad: CalculationStatus.Invalid, self.mcads)
+		for mcad in self.mcads:
+			mcad.reset()
+
+		self.old_mcads = [CalculationStatus.Invalid for old_mcad in self.old_mcads]
 
 		visualization_data_holder = self.visualization_data
 		self.visualization_data = VisualizationData()
