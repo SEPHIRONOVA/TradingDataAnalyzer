@@ -2,7 +2,6 @@ import time
 from Models.market_history import MarketHistory
 from Simulation.market_snapshot import MarketSnapshot
 from Simulation.market_snapshot_helper import MarketSnapshotHelper
-from Simulation.daily_result_evaluator import DailyResultEvaluator
 
 __author__ = 'raymond'
 
@@ -21,21 +20,14 @@ class Market:
 
 	def start(self):
 		old_date = None
-		print('Starting Market simulation')
-		print(time.clock())
+		print('Starting Market simulation: ' + format(time.clock(), '.2f') + ' secs')
+
 		for market_snapshot in self._get_market_snapshot():
 			old_date = Market._print_when_day_pass(old_date, market_snapshot)
 			self.notify_all(market_snapshot)
 
 		print('Market simulation ended')
-		print(time.clock())
-		
-		evaluator = DailyResultEvaluator(1000 * 60)
-		for daily_result in self.traders[0].daily_results:
-			PnL = evaluator.calculate_profit_or_loss(daily_result)
-			print(daily_result.date)
-			print(PnL)
-			print()
+		print()
 
 	def register(self, trader):
 		if trader in self.traders:

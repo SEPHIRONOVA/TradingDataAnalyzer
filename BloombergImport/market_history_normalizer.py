@@ -8,7 +8,7 @@ __author__ = 'raymond'
 
 class MarketHistoryNormalizer:
 	@staticmethod
-	def Normalize(market_history: MarketHistory):
+	def normalize(market_history: MarketHistory):
 		for key, record in market_history.records.items():
 			StockHistoryRecordNormalizer.normalize(record)
 

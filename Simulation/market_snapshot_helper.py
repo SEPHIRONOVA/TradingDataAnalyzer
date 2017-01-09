@@ -37,7 +37,7 @@ class MarketSnapshotHelper:
 		first_stock_snapshot = self.market_snapshot.stock_snapshots[0]
 		stock_snapshot_helper = StockSnapshotHelper(first_stock_snapshot)
 
-		return stock_snapshot_helper.get_date()
+		return stock_snapshot_helper.get_timestamp()
 
 	def get_date(self):
 		first_stock_snapshot = self.market_snapshot.stock_snapshots[0]

@@ -13,20 +13,18 @@ __author__ = 'raymond'
 class BloombergDataReader:
 	@classmethod
 	def load_bloomberg_trading_data(cls, bid_data_file, ask_data_file) -> MarketHistory:
-		print('Start reading data sheet')
-		print(time.clock())
+		print('Start reading data sheet: ' + format(time.clock(), '.2f') + ' secs')
 		stock_history_record_builder = StockHistoryRecordBuilder()
 		cls._load_single_data_sheet(bid_data_file, 'BID', stock_history_record_builder)
 		cls._load_single_data_sheet(ask_data_file, 'ASK', stock_history_record_builder)
-		print('data sheet fully loaded')
-		print(time.clock())
+		print('data sheet fully loaded: ')
 
-		print('start sanitizing market data')
+		print('start sanitizing market data: ' + format(time.clock(), '.2f') + ' secs')
 		stock_history_records = stock_history_record_builder.stock_history_records
 		market_history = MarketHistory(stock_history_records)
-		MarketHistoryNormalizer.Normalize(market_history)
-		print(time.clock())
+		MarketHistoryNormalizer.normalize(market_history)
 		print('data sanitization completed')
+		print()
 
 		return market_history
 
