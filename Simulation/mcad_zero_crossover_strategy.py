@@ -2,14 +2,13 @@ from Simulation.calculation_status import CalculationStatus
 from Simulation.sign_function import SignFunction
 from Simulation.mcad import Mcad
 from Simulation.market_snapshot import MarketSnapshot
-from Simulation.stock_snapshot import StockSnapshot
 from Simulation.stock_snapshot_helper import StockSnapshotHelper
 from Simulation.visualization_data import VisualizationData
 
 __author__ = 'raymond'
 
 
-class VanillaMcadStrategy:
+class McadZeroCrossoverStrategy:
 	def __init__(self, total_capital, num_stocks):
 		self.transaction_amount = total_capital / num_stocks
 		self.mcads = []
@@ -45,9 +44,9 @@ class VanillaMcadStrategy:
 			self.old_mcads[i] = curr_mcad
 
 			if del_mcad > 0:
-				decisions.append((stock_snapshot.ticker, -self.transaction_amount))
-			elif del_mcad < 0:
 				decisions.append((stock_snapshot.ticker, self.transaction_amount))
+			elif del_mcad < 0:
+				decisions.append((stock_snapshot.ticker, -self.transaction_amount))
 
 		return decisions
 
