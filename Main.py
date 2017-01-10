@@ -9,7 +9,7 @@ from Simulation.vanilla_mcad_strategy import VanillaMcadStrategy
 from Simulation.simulation_visualizer import SimulationVisualizer
 from Simulation.daily_result_evaluator import DailyResultEvaluator
 from Simulation.sharp_ratio import SharpRatio
-
+from Simulation.mcadsingalline import McadSignalLine
 
 __author__ = 'raymond'
 
@@ -22,7 +22,7 @@ if __name__ == '__main__':
 
 	num_of_stocks = market.get_num_stocks()
 	initial_capital = capital_per_stock * num_of_stocks
-	trader = Trader(VanillaMcadStrategy(initial_capital, num_of_stocks), capital_per_stock * num_of_stocks)
+	trader = Trader(McadSignalLine(initial_capital, num_of_stocks), capital_per_stock * num_of_stocks)
 
 	market.register(trader)
 	market.start()
