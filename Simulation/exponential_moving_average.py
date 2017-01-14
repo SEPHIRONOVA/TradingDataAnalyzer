@@ -5,7 +5,7 @@ from Simulation.calculation_status import CalculationStatus
 class ExponentialMovingAverage:
 	def __init__(self, first_valid_minute):
 		self.first_valid_minute = first_valid_minute
-		self.multiplier = self._get_multiplier(first_valid_minute)
+		self.multiplier = ExponentialMovingAverage._get_multiplier(first_valid_minute)
 		self.next_minute = 0
 		self.prev_ema = 0
 		self.price_buffer = []
@@ -35,5 +35,6 @@ class ExponentialMovingAverage:
 		self.prev_ema = 0
 		self.price_buffer.clear()
 
-	def _get_multiplier(self, span):
+	@staticmethod
+	def _get_multiplier(span):
 		return 2 / (span + 1)
