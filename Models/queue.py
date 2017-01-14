@@ -5,18 +5,18 @@ __author__ = 'Albert'
 class Queue:
     def __init__(self,size):
         self.size = size
-        self.items = [None]*size
+        self.items = []
 
     def isEmpty(self):
         return self.items == []
 
     def isFull(self):
-        return self.size() == self.size
+        return len(self.items) == self.size
 
     def push(self,item):
-        if(self.size()< self.size):
+        if(len(self.items)< self.size):
             self.enqueue(item)
-        elif (self.size == self.size):
+        elif (len(self.items) == self.size):
             self.dequeue()
             self.enqueue(item)
         else:

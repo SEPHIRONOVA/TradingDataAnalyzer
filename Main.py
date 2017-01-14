@@ -23,11 +23,11 @@ if __name__ == '__main__':
 
 	#trader1 = Trader(McadSignalLineCrossoverStrategy(initial_capital, num_of_stocks), initial_capital)
 	#trader2 = Trader(McadZeroCrossoverStrategy(initial_capital, num_of_stocks), initial_capital)
-	trader3 = Trader(StochasticOscillatorStrategy(initial_capital, num_of_stocks,14,3,3), initial_capital)
+	trader3 = Trader(StochasticOscillatorStrategy(initial_capital, num_of_stocks,14,3,3,0.7,0.3), initial_capital)
 
 	#market.register(trader1)
 	#market.register(trader2)
-	#market.register(trader3)
+	market.register(trader3)
 	market.start()
 
 	evaluator = DailyResultEvaluator(initial_capital)
