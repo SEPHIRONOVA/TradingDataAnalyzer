@@ -94,9 +94,9 @@ class StochasticOscillatorStrategy:
                 dec_value = 0
 
             if dec_value > 0:
-                decisions.append((stock_snapshot.ticker, -self.transaction_amount))
-            elif dec_value < 0:
                 decisions.append((stock_snapshot.ticker, +self.transaction_amount))
+            elif dec_value < 0:
+                decisions.append((stock_snapshot.ticker, -self.transaction_amount))
             else:
                 decisions = []
 
@@ -105,7 +105,6 @@ class StochasticOscillatorStrategy:
 
 
     def reset(self):
-        self.transaction_amount = None
         self.high_total_data = []
         self.low_total_data = []
         self.fast_k_percent = []
@@ -113,9 +112,10 @@ class StochasticOscillatorStrategy:
         self.old_k_percent = []
         self.d_percent = []
         self.old_d_percent = []
-        self.upper_bound = None
-        self.lower_bound = None
 
-        return None
+        visualization_data_holder = self.visualization_data
+        self.visualization_data = VisualizationData()
+
+        return visualization_data_holder
 
 

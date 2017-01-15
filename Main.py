@@ -21,9 +21,16 @@ if __name__ == '__main__':
 	num_of_stocks = market.get_num_stocks()
 	initial_capital = capital_per_stock * num_of_stocks
 
+	#Parameter for stochastic oscillator
+	look_back_period = 14
+	k_percent_period = 3
+	d_percent_period = 3
+	upper_bound = 0.7
+	lower_bound = 0.3
+
 	#trader1 = Trader(McadSignalLineCrossoverStrategy(initial_capital, num_of_stocks), initial_capital)
 	#trader2 = Trader(McadZeroCrossoverStrategy(initial_capital, num_of_stocks), initial_capital)
-	trader3 = Trader(StochasticOscillatorStrategy(initial_capital, num_of_stocks,14,3,3,0.7,0.3), initial_capital)
+	trader3 = Trader(StochasticOscillatorStrategy(initial_capital, num_of_stocks,look_back_period,k_percent_period,d_percent_period,upper_bound,lower_bound), initial_capital)
 
 	#market.register(trader1)
 	#market.register(trader2)
